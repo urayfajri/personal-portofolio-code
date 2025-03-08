@@ -3,7 +3,9 @@
 import { FC, useEffect, useRef } from "react";
 import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import Bounded from "@/components/Bounded";
+import { Shapes } from "./Shapes";
 
 /**
  * Props for `Hero`.
@@ -74,15 +76,16 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   };
 
   return (
-    <section
+    <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       ref={component}
     >
       <div className="grid min-h-[70vh] grid-cols-1 md:grid-cols-2 items-center">
+        <Shapes />
         <div className="col-start-1 md:row-start-1">
           <h1
-            className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold leading-none tracking-tighter"
+            className="mb-8 text-[clamp(2rem,12vmin,16rem)] max-sm:text-[clamp(2rem,8vmin,16rem)] font-extrabold leading-none tracking-tighter text-center md:text-left"
             aria-label={
               slice.primary.first_name + " " + slice.primary.last_name
             }
@@ -90,19 +93,19 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             <span className="block text-slate-300 tracking-wider">
               {renderLetters(slice.primary.first_name, "first")}
             </span>
-            <span className="md:-mt-6 -mt-[.2rem] block text-slate-500">
+            <span className="-mt-[.2rem] block text-slate-500">
               {renderLetters(slice.primary.last_name, "last")}
             </span>
           </h1>
           <span
             className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text 
-            text-2xl md:text-4xl font-bold uppercase tracking-[.2rem] text-transparent opacity-0"
+            text-2xl md:text-3xl sm:text-xl font-bold uppercase tracking-[.2rem] text-transparent opacity-0 text-center md:text-left"
           >
             {slice.primary.tag_line}
           </span>
         </div>
       </div>
-    </section>
+    </Bounded>
   );
 };
 
