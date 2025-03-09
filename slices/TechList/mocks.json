@@ -8,10 +8,31 @@
 				"value": "far",
 				"type": "Text"
 			},
-			"tech_name": {
-				"__TYPE__": "FieldContent",
-				"value": "lungs",
-				"type": "Text"
+			"tech": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"tech_name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "breath",
+									"type": "Text"
+								}
+							],
+							[
+								"tech_color",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "#df20f2",
+									"type": "Color"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

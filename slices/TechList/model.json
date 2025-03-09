@@ -19,11 +19,27 @@
             "placeholder": ""
           }
         },
-        "tech_name": {
-          "type": "Text",
+        "tech": {
+          "type": "Group",
           "config": {
-            "label": "Tech Name",
-            "placeholder": ""
+            "label": "Tech",
+            "repeat": true,
+            "fields": {
+              "tech_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Tech Name",
+                  "placeholder": ""
+                }
+              },
+              "tech_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Tech Color",
+                  "placeholder": ""
+                }
+              }
+            }
           }
         }
       },
