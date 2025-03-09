@@ -1,0 +1,19 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "far",
+				"type": "Text"
+			},
+			"tech_name": {
+				"__TYPE__": "FieldContent",
+				"value": "lungs",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]
