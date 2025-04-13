@@ -1,13 +1,13 @@
 import React from "react";
 import clsx from "clsx";
 
-type BoundedProps<T extends React.ElementType = "section"> = {
+type BoundedProps<T extends React.ElementType> = {
   as?: T;
   className?: string;
   children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<T>;
 
-const Bounded = React.forwardRef<HTMLElement, BoundedProps>(
+const Bounded = React.forwardRef<HTMLElement, BoundedProps<React.ElementType>>(
   ({ as: Comp = "section", className, children, ...restProps }, ref) => {
     return (
       <Comp
