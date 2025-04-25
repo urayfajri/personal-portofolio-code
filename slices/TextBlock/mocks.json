@@ -2,7 +2,19 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Veniam commodo ad ea eu est nulla ad ea pariatur officia aliqua ipsum ex sunt nostrud. Commodo consectetur cillum nulla aliqua et cupidatat exercitation reprehenderit. Nostrud ut consectetur non occaecat sunt dolore est laborum qui deserunt ad."
+						}
+					}
+				]
+			}
+		},
 		"items": []
 	}
 ]
