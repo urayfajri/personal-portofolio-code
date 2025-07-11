@@ -5,12 +5,12 @@ import { createClient } from "@/prismicio";
 
 import ContentBody from "@/components/ContentBody";
 
-type Params = { uid: string };
+type Params = Promise<{ uid: string }>;
 
 export default async function Page({ params }: { params: Params }) {
   const client = createClient();
   const page = await client
-    .getByUID("project", params.uid)
+    .getByUID("project", (await params).uid)
     .catch(() => notFound());
 
   return <ContentBody page={page} />;
@@ -23,7 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const client = createClient();
   const page = await client
-    .getByUID("project", params.uid)
+    .getByUID("project", (await params).uid)
     .catch(() => notFound());
 
   return {
