@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { asImageSrc, isFilled } from "@prismicio/client";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,6 +21,23 @@ type ContentListProps = {
   contentType: Content.ContentIndexSlice["primary"]["content_type"];
   fallbackItemImage: Content.ContentIndexSlice["primary"]["fallback_item_image"];
   viewMoreText: Content.ContentIndexSlice["primary"]["view_more_text"];
+};
+
+const MAX_PREVIEW_WIDTH = 320;
+const MAX_PREVIEW_HEIGHT = 320;
+
+const getPreviewDimensions = (width?: number, height?: number) => {
+  const fallback = { width: 220, height: 320 };
+  if (!width || !height) return fallback;
+
+  const widthScale = MAX_PREVIEW_WIDTH / width;
+  const heightScale = MAX_PREVIEW_HEIGHT / height;
+  const scale = Math.min(widthScale, heightScale, 1);
+
+  return {
+    width: Math.round(width * scale),
+    height: Math.round(height * scale),
+  };
 };
 
 export default function ContentList({
@@ -137,32 +160,58 @@ export default function ContentList({
     hideHighlight();
   };
 
-  const contentImages = items.map((item) => {
-    const image = isFilled.image(item.data.hover_image)
-      ? item.data.hover_image
-      : fallbackItemImage;
-    return asImageSrc(image, {
-      fit: "crop",
-      w: 220,
-      h: 320,
-      exp: -10,
-    });
-  });
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort(
+        (a, b) =>
+          new Date(b.data.date ?? "").getTime() -
+          new Date(a.data.date ?? "").getTime(),
+      ),
+    [items],
+  );
+
+  const contentImages = useMemo(
+    () =>
+      sortedItems.map((item) => {
+        const image = isFilled.image(item.data.hover_image)
+          ? item.data.hover_image
+          : fallbackItemImage;
+        const url = asImageSrc(image) ?? "";
+        const dimensions = getPreviewDimensions(
+          image?.dimensions?.width,
+          image?.dimensions?.height,
+        );
+
+        return {
+          url,
+          width: dimensions.width,
+          height: dimensions.height,
+        };
+      }),
+    [sortedItems, fallbackItemImage],
+  );
 
   // Preload images
   useEffect(() => {
-    contentImages.forEach((url) => {
+    contentImages.forEach(({ url }) => {
       if (!url) return;
       const img = new Image();
       img.src = url;
     });
   }, [contentImages]);
 
-  const sortedItems = [...items].sort(
-    (a, b) =>
-      new Date(b.data.date ?? "").getTime() -
-      new Date(a.data.date ?? "").getTime(),
-  );
+  const currentImage =
+    currentItem !== null ? contentImages[currentItem] : null;
+
+  const revealStyles =
+    currentImage && currentImage.url
+      ? {
+          backgroundImage: `url(${currentImage.url})`,
+          width: currentImage.width,
+          height: currentImage.height,
+        }
+      : {};
+
   itemsRef.current = [];
 
   return (
@@ -211,11 +260,8 @@ export default function ContentList({
         </ul>
       </div>
       <div
-        className="hover-reveal pointer-events-none fixed top-0 left-0 -z-10 h-[320px] w-[220px] rounded-lg bg-cover bg-center opacity-0 transition-[background] duration-300"
-        style={{
-          backgroundImage:
-            currentItem !== null ? `url(${contentImages[currentItem]})` : "",
-        }}
+        className="hover-reveal pointer-events-none fixed top-0 left-0 -z-10 rounded-lg bg-contain bg-center bg-no-repeat opacity-0 transition-all duration-300"
+        style={revealStyles}
         ref={revealRef}
       ></div>
     </>
