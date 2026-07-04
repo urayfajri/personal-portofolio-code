@@ -102,7 +102,7 @@ export type BlogPostDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = HeroSlice;
+type HomepageDocumentDataSlicesSlice = HeroSlice | DevQuoteSlice;
 
 /**
  * Content for Homepage documents
@@ -856,6 +856,51 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *DevQuote → Default → Primary*
+ */
+export interface DevQuoteSliceDefaultPrimary {
+  /**
+   * Section Label field in *DevQuote → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Dev Quote
+   * - **API ID Path**: dev_quote.default.primary.section_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for DevQuote Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DevQuoteSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<DevQuoteSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *DevQuote*
+ */
+type DevQuoteSliceVariation = DevQuoteSliceDefault;
+
+/**
+ * DevQuote Shared Slice
+ *
+ * - **API ID**: `dev_quote`
+ * - **Description**: Random developer quote section
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DevQuoteSlice = prismic.SharedSlice<
+  "dev_quote",
+  DevQuoteSliceVariation
+>;
+
+/**
  * Primary content in *ImageBlock → Default → Primary*
  */
 export interface ImageBlockSliceDefaultPrimary {
@@ -1079,6 +1124,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      DevQuoteSlice,
+      DevQuoteSliceDefaultPrimary,
+      DevQuoteSliceVariation,
+      DevQuoteSliceDefault,
       ImageBlockSlice,
       ImageBlockSliceDefaultPrimary,
       ImageBlockSliceVariation,

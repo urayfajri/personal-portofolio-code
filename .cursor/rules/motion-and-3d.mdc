@@ -1,0 +1,25 @@
+---
+description: GSAP, Three.js, and motion accessibility conventions
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# Motion and 3D
+
+- Use Client Components for GSAP, refs, browser APIs, `@react-three/fiber`, and `@react-three/drei`.
+- Scope GSAP animations with `gsap.context(..., ref)` and clean them up with `ctx.revert()`.
+- Prefer `useLayoutEffect` for layout-sensitive GSAP work and `useEffect` for non-layout animation setup.
+- Register GSAP plugins once per module before use, for example `gsap.registerPlugin(ScrollTrigger)`.
+- Respect reduced-motion preferences for large movement, long timelines, parallax, or 3D scenes. Use `usePrefersReducedMotion` when adding new animated sections.
+- Mark purely decorative motion or shapes with `aria-hidden` and keep the meaningful content available as text.
+- Avoid animating layout-heavy properties when transform or opacity can achieve the same effect.
+
+```tsx
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    gsap.from(elementRef.current, { autoAlpha: 0, y: 24 });
+  }, containerRef);
+
+  return () => ctx.revert();
+}, []);
+```

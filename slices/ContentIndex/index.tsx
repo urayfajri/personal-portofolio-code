@@ -26,6 +26,7 @@ const BlogPostIndex = async ({
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      id={slice.primary.content_type === "Project" ? "projects" : undefined}
     >
       <AnimatedIntro
         heading={slice.primary.heading}
