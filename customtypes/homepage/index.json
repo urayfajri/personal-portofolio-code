@@ -13,6 +13,9 @@
           "choices": {
             "hero": {
               "type": "SharedSlice"
+            },
+            "dev_quote": {
+              "type": "SharedSlice"
             }
           }
         }

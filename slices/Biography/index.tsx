@@ -20,6 +20,7 @@ const Biography = ({ slice }: BiographyProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative"
+      id="contact"
     >
       <div className="about-shell relative isolate overflow-hidden rounded-[2.5rem] border border-white/5 bg-slate-950/60 p-8 shadow-[0_10px_80px_rgba(15,23,42,0.45)] backdrop-blur-lg md:p-14">
         <span className="about-aurora about-aurora--one" aria-hidden />

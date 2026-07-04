@@ -1,0 +1,16 @@
+---
+description: Core standards for the Uray personal portfolio project
+alwaysApply: true
+---
+
+# Project Standards
+
+- Treat this repo as a personal portfolio built with Next.js 15, React 19, TypeScript strict mode, Tailwind CSS 4, Prismic Slice Machine, GSAP, and React Three Fiber.
+- Prefer existing local patterns before adding new abstractions. Reuse `@/components`, `@/hooks`, `@/utils`, `@/slices`, and `@/prismicio` where possible.
+- Keep changes small and focused. Avoid unrelated refactors, dependency churn, or formatting-only changes outside touched files.
+- Use the `@/*` path alias for internal imports instead of deep relative paths.
+- Preserve strict TypeScript safety. Do not use `any` unless the external library type makes it unavoidable and add a short reason.
+- Follow the repo formatter and linter: Prettier with `prettier-plugin-tailwindcss`, ESLint `next/core-web-vitals`, and `next/typescript`.
+- Prefer semantic HTML and accessible labels for navigation, buttons, links, media, and animated decorative elements.
+- When changing user-facing UI, keep the portfolio style: dark slate surfaces, yellow highlights, large typography, responsive layouts, and polished motion.
+- Follow `design-theme.mdc` for UI color, tone, and motion decisions.

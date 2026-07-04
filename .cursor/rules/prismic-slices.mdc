@@ -1,0 +1,25 @@
+---
+description: Prismic Slice Machine component conventions
+globs: slices/**/*.tsx
+alwaysApply: false
+---
+
+# Prismic Slices
+
+- Type each slice with `SliceComponentProps<Content.XSlice>` and export the props type near the component.
+- Keep `data-slice-type` and `data-slice-variation` on the root slice wrapper so Slice Machine metadata stays intact.
+- Use `Bounded` as the default section wrapper unless the slice intentionally owns full-bleed layout.
+- Use Prismic helpers like `isFilled`, `PrismicRichText`, `PrismicNextImage`, and `PrismicNextLink` instead of manually reading rich text, image, or link internals.
+- Treat Prismic fields as nullable. Render optional fields only when filled instead of coercing empty values into UI.
+- Do not rename generated custom type or slice model files unless the Slice Machine schema is updated too.
+- Keep async Prismic queries in Server Components. Move animated or interactive parts into small Client Components.
+
+```tsx
+export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+
+const Hero: FC<HeroProps> = ({ slice }) => (
+  <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    {/* slice UI */}
+  </Bounded>
+);
+```

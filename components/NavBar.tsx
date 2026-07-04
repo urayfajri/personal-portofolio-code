@@ -19,13 +19,13 @@ export default function NavBar({
 
   return (
     <nav aria-label="Main navigation">
-      <ul className="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
+      <ul className="mx-auto flex flex-col justify-between rounded-[50px] border border-white/10 bg-slate-950/50 px-5 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl md:flex-row md:items-center">
         <div className="flex items-center justify-between">
           <NameLogo name={settings.data.name} />
           <button
             aria-expanded={open}
             aria-label="Open menu"
-            className="block p-2 text-2xl text-slate-800 md:hidden"
+            className="block p-2 text-2xl text-slate-100 md:hidden"
             onClick={() => setOpen(true)}
           >
             <MdMenu />
@@ -33,14 +33,14 @@ export default function NavBar({
         </div>
         <div
           className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-slate-50 pr-4 pt-14 transition-transform duration-300 ease-in-out md:hidden",
-            open ? "translate-x-0" : "translate-x-[100%]"
+            "fixed top-0 right-0 bottom-0 left-0 z-50 flex flex-col items-end gap-4 bg-slate-950/90 pt-14 pr-4 backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden",
+            open ? "translate-x-0" : "translate-x-[100%]",
           )}
         >
           <button
             aria-label="Close menu"
             aria-expanded={open}
-            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 md:hidden "
+            className="fixed top-3 right-4 block p-2 text-2xl text-slate-100 md:hidden"
             onClick={() => setOpen(false)}
           >
             <MdClose />
@@ -49,9 +49,7 @@ export default function NavBar({
             <React.Fragment key={label}>
               <li className="first:mt-8">
                 <PrismicNextLink
-                  className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900 "
-                  )}
+                  className="group relative block overflow-hidden rounded px-3 text-3xl font-bold"
                   field={link}
                   onClick={() => setOpen(false)}
                   aria-current={
@@ -62,18 +60,27 @@ export default function NavBar({
                 >
                   <span
                     className={clsx(
-                      "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                      "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                       pathname.includes(asLink(link) as string)
-                        ? "translate-y-6"
-                        : "translate-y-18"
+                        ? "translate-y-0"
+                        : "translate-y-full",
                     )}
                   />
-                  <span className="relative">{label}</span>
+                  <span
+                    className={clsx(
+                      "relative z-10 transition-colors duration-300",
+                      pathname.includes(asLink(link) as string)
+                        ? "text-slate-950"
+                        : "text-white group-hover:text-slate-950",
+                    )}
+                  >
+                    {label}
+                  </span>
                 </PrismicNextLink>
               </li>
               {index < settings.data.nav_item.length - 1 && (
                 <span
-                  className="hidden text-4xl font-thin leading-[0] text-slate-400 md:inline"
+                  className="hidden text-4xl leading-[0] font-thin text-slate-400 md:inline"
                   aria-hidden="true"
                 >
                   /
@@ -86,6 +93,7 @@ export default function NavBar({
               linkField={settings.data.cta_link}
               label={settings.data.cta_label}
               className="ml-3"
+              variant="dark"
             />
           </li>
         </div>
@@ -99,10 +107,18 @@ function NameLogo({ name }: { name: KeyTextField }) {
   return (
     <Link
       href="/"
-      aria-label="Home page"
-      className="text-xl font-extrabold tracking-tighter text-slate-900"
+      aria-label={name ? `Home — ${name}` : "Home page"}
+      className="group inline-flex shrink-0 items-center bg-transparent p-0 transition-transform duration-300 hover:scale-105"
     >
-      {name}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/photo-profile.png"
+        alt=""
+        width={44}
+        height={44}
+        decoding="async"
+        className="h-9 w-9 bg-transparent object-contain object-center transition-opacity duration-300 group-hover:opacity-90 md:h-11 md:w-11"
+      />
     </Link>
   );
 }
@@ -120,9 +136,7 @@ function DesktopMenu({
         <React.Fragment key={label}>
           <li>
             <PrismicNextLink
-              className={clsx(
-                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900"
-              )}
+              className="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold"
               field={link}
               aria-current={
                 pathname.includes(asLink(link) as string) ? "page" : undefined
@@ -130,18 +144,27 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string)
-                    ? "translate-y-6"
-                    : "translate-y-8"
+                    ? "translate-y-0"
+                    : "translate-y-full",
                 )}
               />
-              <span className="relative">{label}</span>
+              <span
+                className={clsx(
+                  "relative z-10 transition-colors duration-300",
+                  pathname.includes(asLink(link) as string)
+                    ? "text-slate-950"
+                    : "text-white group-hover:text-slate-950",
+                )}
+              >
+                {label}
+              </span>
             </PrismicNextLink>
           </li>
           {index < settings.data.nav_item.length - 1 && (
             <span
-              className="hidden text-4xl font-thin leading-[0] text-slate-400 md:inline"
+              className="hidden text-4xl leading-[0] font-thin text-slate-400 md:inline"
               aria-hidden="true"
             >
               /
@@ -154,6 +177,7 @@ function DesktopMenu({
           linkField={settings.data.cta_link}
           label={settings.data.cta_label}
           className="ml-3"
+          variant="dark"
         />
       </li>
     </div>

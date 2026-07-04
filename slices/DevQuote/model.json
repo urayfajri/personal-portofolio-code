@@ -1,0 +1,26 @@
+{
+  "id": "dev_quote",
+  "type": "SharedSlice",
+  "name": "DevQuote",
+  "description": "Random developer quote section",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "section_label": {
+          "type": "Text",
+          "config": {
+            "label": "Section Label",
+            "placeholder": "Dev Quote"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

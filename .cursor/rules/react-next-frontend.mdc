@@ -1,0 +1,23 @@
+---
+description: React and Next.js frontend conventions for components and UI
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# React and Next.js Frontend
+
+- Default to Server Components. Add `"use client"` only when the file needs state, effects, browser APIs, refs, GSAP, Three.js, or Next client hooks.
+- Keep component props explicitly typed with local `type` aliases. Prefer generated Prismic `Content.*` types and React DOM types over loose objects.
+- Use existing primitives such as `Bounded`, `Heading`, `Button`, `ContentBody`, and `PrismicNextLink` before creating new UI building blocks.
+- Compose class names with `clsx` when classes are conditional. Let Prettier sort Tailwind classes.
+- Keep responsive styling mobile-first with Tailwind variants like `md:` and `lg:`.
+- Do not fetch Prismic data in Client Components. Fetch in async Server Components, routes, or helpers, then pass serializable data down.
+- Prefer meaningful keys from content fields. Use array indexes only for static separators or content without stable ids.
+
+```tsx
+// Good: server component fetches data, child receives typed props.
+const client = createClient();
+const page = await client.getByUID("page", uid);
+
+return <SomeSection page={page} />;
+```

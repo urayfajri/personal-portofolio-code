@@ -1,0 +1,45 @@
+---
+description: Visual design theme for the Uray personal portfolio
+alwaysApply: false
+globs: app/**/*.{tsx,jsx,css},components/**/*.{tsx,jsx},slices/**/*.{tsx,jsx,css}
+---
+
+# Design Theme
+
+## Mode and surfaces
+
+- Dark-first layout: `bg-slate-900` base with animated ether gradient background.
+- Prefer glass surfaces over solid light panels: `bg-slate-950/40–60`, `backdrop-blur-xl`, `border-white/5–10`.
+- Navigation should blend with the hero, not break the dark flow with opaque white bars.
+
+## Color system
+
+- **Primary text:** `text-white` for hero names and key headings.
+- **Secondary text:** `text-slate-100` → `text-slate-300` → `text-slate-400` (clear hierarchy).
+- **Accent:** `yellow-300` / `amber-200` for CTAs, hover states, and highlights.
+- **Decorative layers:** muted indigo/amber at low opacity; avoid neon confetti or playful shapes.
+
+## Voice and content
+
+- Professional, ownership-driven, collaborative tone (aligned with GitHub bio).
+- Hero microcopy in English; emphasize clean architecture, performance, and maintainable UI.
+- CTAs should guide visitors to projects and contact, not leave them at name + title only.
+
+## Motion
+
+- Use GSAP with `gsap.context` cleanup and `usePrefersReducedMotion` for decorative motion.
+- Hero animations: polished entrance (greeting → profile → summary → name → role → CTAs).
+- Background motion: slow drift, small amplitude — suggest calm authority, not playfulness.
+- Mark decorative layers with `aria-hidden="true"`.
+
+## Imagery
+
+- Profile photo: rounded with `ring-white/20` and soft glow; supports personal connection.
+- 3D hero shapes: metallic Infinity Stone palette is acceptable; keep lighting cinematic.
+- Avoid matte toy/plastic materials unless explicitly requested.
+
+## Accessibility
+
+- Ensure hero name contrast meets readable levels on `#0f172a`.
+- Emoji in greetings should be `aria-hidden` when redundant with adjacent text.
+- Section anchors (`#projects`, `#contact`) must map to real `id` attributes on slices.

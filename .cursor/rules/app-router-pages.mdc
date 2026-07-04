@@ -1,0 +1,20 @@
+---
+description: Next.js App Router page and route handler conventions
+globs: app/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# App Router Pages
+
+- Follow Next.js App Router conventions for `page.tsx`, `layout.tsx`, `route.ts`, `generateMetadata`, and `generateStaticParams`.
+- In dynamic pages, keep `params` typing consistent with Next 15 async params used in this repo: `type Params = Promise<{ uid: string }>;`.
+- Use `createClient()` from `@/prismicio` for Prismic queries. Handle missing documents with `notFound()` when the page cannot render.
+- Keep metadata tied to Prismic fields such as `title` and `meta_description`.
+- Keep page files thin: fetch data, handle routing states, and delegate UI rendering to components or slices.
+- Route handlers should return clear `Response` or `NextResponse` objects and avoid leaking secret values in errors.
+
+```tsx
+const page = await client
+  .getByUID("blog_post", (await params).uid)
+  .catch(() => notFound());
+```

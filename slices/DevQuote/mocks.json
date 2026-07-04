@@ -1,0 +1,14 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "section_label": {
+        "__TYPE__": "FieldContent",
+        "value": "Dev Quote",
+        "type": "Text"
+      }
+    },
+    "items": []
+  }
+]
