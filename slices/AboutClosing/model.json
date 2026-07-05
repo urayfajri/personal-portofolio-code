@@ -1,0 +1,42 @@
+{
+  "id": "about_closing",
+  "type": "SharedSlice",
+  "name": "AboutClosing",
+  "description": "Closing narrative section for the About page",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "story_chapter_label": {
+          "type": "Text",
+          "config": {
+            "label": "Story Chapter Label",
+            "placeholder": "06 — Let's Connect"
+          }
+        },
+        "closing_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Closing Heading",
+            "placeholder": "Let's build something meaningful"
+          }
+        },
+        "closing_body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Closing Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "story_chapter_label": {
+        "__TYPE__": "FieldContent",
+        "value": "06 — Let's Connect",
+        "type": "Text"
+      },
+      "closing_heading": {
+        "__TYPE__": "FieldContent",
+        "value": "Let's build something meaningful",
+        "type": "Text"
+      },
+      "closing_body": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "I'm open to meaningful collaborations and new opportunities. Let's connect."
+            }
+          }
+        ]
+      }
+    },
+    "items": []
+  }
+]

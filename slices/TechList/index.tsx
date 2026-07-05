@@ -1,6 +1,6 @@
 "use client";
 
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import React, { JSX, useLayoutEffect, useRef } from "react";
 import { MdCircle } from "react-icons/md";
@@ -65,6 +65,11 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       ref={component}
     >
       <Bounded>
+        {isFilled.keyText(slice.primary.story_chapter_label) ? (
+          <span className="story-chapter-badge mb-4 inline-block">
+            {slice.primary.story_chapter_label}
+          </span>
+        ) : null}
         <Heading size="xl" className="mb-8" as="h2">
           {slice.primary.heading}
         </Heading>

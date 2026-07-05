@@ -28,6 +28,9 @@
             },
             "biography": {
               "type": "SharedSlice"
+            },
+            "about_closing": {
+              "type": "SharedSlice"
             }
           }
         }

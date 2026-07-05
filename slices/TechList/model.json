@@ -12,6 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "story_chapter_label": {
+          "type": "Text",
+          "config": {
+            "label": "Story Chapter Label",
+            "placeholder": "05 — Tools of the Craft"
+          }
+        },
         "heading": {
           "type": "Text",
           "config": {
