@@ -20,11 +20,6 @@ const AboutClosing = ({ slice }: AboutClosingProps): JSX.Element => {
         <span className="about-aurora about-aurora--two" aria-hidden />
 
         <StoryChapter
-          chapter={
-            isFilled.keyText(primary.story_chapter_label)
-              ? primary.story_chapter_label
-              : undefined
-          }
           title={
             isFilled.keyText(primary.closing_heading)
               ? primary.closing_heading

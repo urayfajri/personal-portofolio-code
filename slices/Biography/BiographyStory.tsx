@@ -69,7 +69,7 @@ export default function BiographyStory({ slice }: BiographyStoryProps) {
 
         {isFilled.keyText(primary.heading) ? (
           <Heading
-            size="xl"
+            size="md"
             className="bio-story-chapter about-heading text-balance opacity-0"
           >
             {primary.heading}

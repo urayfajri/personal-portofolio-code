@@ -45,6 +45,13 @@
                   "label": "Tech Color",
                   "placeholder": ""
                 }
+              },
+              "tech_badge": {
+                "type": "Text",
+                "config": {
+                  "label": "Tech Badge",
+                  "placeholder": "Frontend"
+                }
               }
             }
           }

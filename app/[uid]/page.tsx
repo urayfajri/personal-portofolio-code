@@ -4,6 +4,7 @@ import { isFilled, asImageSrc } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
+import StorySliceZone from "@/components/StorySliceZone";
 import { components } from "@/slices";
 
 type Params = { uid: string };
@@ -13,7 +14,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
   const page = await client.getByUID("page", uid).catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return uid === "about" ? (
+    <StorySliceZone slices={page.data.slices} />
+  ) : (
+    <SliceZone slices={page.data.slices} components={components} />
+  );
 }
 
 export async function generateMetadata({

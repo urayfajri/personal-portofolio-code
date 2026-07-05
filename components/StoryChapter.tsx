@@ -25,7 +25,7 @@ export default function StoryChapter({
         <span className="story-chapter-badge mb-3 inline-block">{chapter}</span>
       ) : null}
       {title ? (
-        <h3 className="about-heading mb-4 text-balance text-2xl font-bold md:text-3xl">
+        <h3 className="about-heading mb-3 text-balance text-xl font-bold md:text-2xl">
           {title}
         </h3>
       ) : null}

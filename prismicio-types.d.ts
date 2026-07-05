@@ -1059,6 +1059,11 @@ export interface TechListSliceDefaultPrimaryTechItem {
    * - **Documentation**: https://prismic.io/docs/field#color
    */
   tech_color: prismic.ColorField;
+
+  /**
+   * Tech Badge field in *TechList → Default → Primary → Tech*
+   */
+  tech_badge: prismic.KeyTextField;
 }
 
 /**
