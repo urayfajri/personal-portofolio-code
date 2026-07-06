@@ -7,9 +7,18 @@ import { components } from "@/slices";
 
 export default async function Page() {
   const client = createClient();
-  const page = await client.getSingle("homepage");
+  const [page, settings] = await Promise.all([
+    client.getSingle("homepage"),
+    client.getSingle("settings"),
+  ]);
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <SliceZone
+      slices={page.data.slices}
+      components={components}
+      context={{ settings }}
+    />
+  );
 }
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useRef } from "react";
-import { Content, KeyTextField } from "@prismicio/client";
+import { asLink, Content, isFilled, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
 import Bounded from "@/components/Bounded";
@@ -9,10 +9,14 @@ import HeroLinkButton from "@/components/HeroLinkButton";
 import { HeroAtmosphere } from "./HeroAtmosphere";
 import { Shapes } from "./Shapes";
 
+type HeroContext = {
+  settings?: Content.SettingsDocument;
+};
+
 /**
  * Props for `Hero`.
  */
-export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+export type HeroProps = SliceComponentProps<Content.HeroSlice, HeroContext>;
 
 const jobTitleClassName =
   "job-title block bg-gradient-to-tr from-yellow-300 via-yellow-200 to-yellow-300 bg-clip-text text-center text-2xl font-bold uppercase tracking-[0.2rem] text-transparent opacity-0 sm:text-xl md:text-left md:text-3xl";
@@ -20,8 +24,12 @@ const jobTitleClassName =
 /**
  * Component for "Hero" Slices.
  */
-const Hero: FC<HeroProps> = ({ slice }) => {
+const Hero: FC<HeroProps> = ({ slice, context }) => {
   const component = useRef(null);
+  const contactHref =
+    context?.settings && isFilled.link(context.settings.data.cta_link)
+      ? asLink(context.settings.data.cta_link)
+      : null;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -163,17 +171,19 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <HeroLinkButton
-              href="/#projects"
+              href="/projects"
               label="View My Work"
               variant="primary"
               className="hero-cta opacity-0"
             />
-            <HeroLinkButton
-              href="/#contact"
-              label="Get in Touch"
-              variant="secondary"
-              className="hero-cta opacity-0"
-            />
+            {contactHref ? (
+              <HeroLinkButton
+                href={contactHref}
+                label="Get in Touch"
+                variant="secondary"
+                className="hero-cta opacity-0"
+              />
+            ) : null}
           </div>
         </div>
       </div>

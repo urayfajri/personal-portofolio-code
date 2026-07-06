@@ -10,6 +10,7 @@ type ButtonProps = {
   showIcon?: boolean;
   className?: string;
   variant?: "light" | "dark";
+  onClick?: () => void;
 };
 
 export default function Button({
@@ -18,10 +19,12 @@ export default function Button({
   showIcon = true,
   className,
   variant = "light",
+  onClick,
 }: ButtonProps) {
   return (
     <PrismicNextLink
       field={linkField}
+      onClick={onClick}
       className={clsx(
         "group relative flex w-fit items-center justify-center overflow-hidden rounded-md px-4 py-2 font-bold transition-transform ease-out hover:scale-105",
         variant === "dark"

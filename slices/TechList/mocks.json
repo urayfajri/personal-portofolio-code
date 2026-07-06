@@ -1,40 +1,80 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"heading": {
-				"__TYPE__": "FieldContent",
-				"value": "far",
-				"type": "Text"
-			},
-			"tech": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"tech_name",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "breath",
-									"type": "Text"
-								}
-							],
-							[
-								"tech_color",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "#df20f2",
-									"type": "Color"
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "story_chapter_label": {
+        "__TYPE__": "FieldContent",
+        "value": "05 — Tools of the Craft",
+        "type": "Text"
+      },
+      "heading": {
+        "__TYPE__": "FieldContent",
+        "value": "What I build with",
+        "type": "Text"
+      },
+      "tech": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "React", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#61DAFB", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Frontend", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "TypeScript", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#3178C6", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Language", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "Next.js", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#ffffff", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Frontend", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "Node.js", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#339933", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Backend", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "Tailwind CSS", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#06B6D4", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Styling", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "Prisma", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#2D3748", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Database", "type": "Text" }]
+            ]
+          },
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              ["tech_name", { "__TYPE__": "FieldContent", "value": "GSAP", "type": "Text" }],
+              ["tech_color", { "__TYPE__": "FieldContent", "value": "#88CE02", "type": "Color" }],
+              ["tech_badge", { "__TYPE__": "FieldContent", "value": "Animation", "type": "Text" }]
+            ]
+          }
+        ]
+      }
+    },
+    "items": []
+  }
 ]

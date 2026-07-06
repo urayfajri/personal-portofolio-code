@@ -1,100 +1,90 @@
 "use client";
 
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import React, { JSX, useLayoutEffect, useRef } from "react";
-import { MdCircle } from "react-icons/md";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { JSX, useEffect, useRef, useState } from "react";
 
 import Bounded from "@/components/Bounded";
-import Heading from "@/components/Heading";
+import TechMarqueeLane from "./TechMarqueeLane";
+import { TechStaticGrid, type TechItem } from "./TechShowcase";
+import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
-gsap.registerPlugin(ScrollTrigger);
-
-/**
- * Props for `TechList`.
- */
 export type TechListProps = SliceComponentProps<Content.TechListSlice>;
 
-/**
- * Component for "TechList" Slices.
- */
 const TechList = ({ slice }: TechListProps): JSX.Element => {
-  const component = useRef(null);
+  const marqueeAreaRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const techItems = (slice.primary.tech ?? []) as TechItem[];
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // create as many GSAP animations and/or ScrollTriggers here as you want...
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          pin: true, // pin the trigger element while active
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 4,
-        },
-      });
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!marqueeAreaRef.current?.contains(event.target as Node)) {
+        setActiveIndex(null);
+        setHoveredIndex(null);
+      }
+    };
 
-      tl.fromTo(
-        ".tech-row",
-        {
-          x: (index) => {
-            return index % 2 === 0
-              ? gsap.utils.random(600, 400)
-              : gsap.utils.random(-600, -400);
-          },
-        },
-        {
-          x: (index) => {
-            return index % 2 === 0
-              ? gsap.utils.random(-600, -400)
-              : gsap.utils.random(600, 400);
-          },
-          ease: "power1.inOut",
-        }
-      );
-    }, component);
-    return () => ctx.revert(); // cleanup!
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
   }, []);
+
+  const handleSelect = (index: number) => {
+    setActiveIndex((current) => (current === index ? current : index));
+  };
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="wrapper overflow-hidden"
-      ref={component}
+      className="tech-showcase relative isolate overflow-hidden py-4 md:py-6"
+      aria-label={
+        isFilled.keyText(slice.primary.heading)
+          ? slice.primary.heading
+          : "Tech stack"
+      }
     >
-      <Bounded>
-        <Heading size="xl" className="mb-8" as="h2">
-          {slice.primary.heading}
-        </Heading>
-      </Bounded>
+      {techItems.length > 0 ? (
+        <>
+          <ul className="sr-only">
+            {techItems.map((item, index) => (
+              <li key={`sr-${item.tech_name}-${index}`}>
+                {isFilled.keyText(item.tech_name) ? item.tech_name : "Tech"}
+                {isFilled.keyText(item.tech_badge)
+                  ? ` — ${item.tech_badge}`
+                  : ""}
+              </li>
+            ))}
+          </ul>
 
-      {slice.primary.tech.map(({ tech_color, tech_name }, index) => (
-        <div
-          key={index}
-          className="tech-row mb-8 flex items-center justify-center gap-4 text-slate-700"
-          aria-label={tech_name || ""}
-        >
-          {Array.from({ length: 15 }, (_, index) => (
-            <React.Fragment key={index}>
-              <span
-                className={
-                  "tech-item text-8xl font-extrabold uppercase tracking-tighter"
-                }
-                style={{
-                  color: index === 7 && tech_color ? tech_color : "inherit",
-                }}
-              >
-                {tech_name}
-              </span>
-              <span className="text-3xl">
-                <MdCircle />
-              </span>
-            </React.Fragment>
-          ))}
-        </div>
-      ))}
+          <div ref={marqueeAreaRef} className="relative">
+            {prefersReducedMotion ? (
+              <Bounded className="!py-0">
+                <TechStaticGrid
+                  items={techItems}
+                  activeIndex={activeIndex}
+                  hoveredIndex={hoveredIndex}
+                  onSelect={handleSelect}
+                  onHoverStart={setHoveredIndex}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                />
+              </Bounded>
+            ) : (
+              <div className="tech-marquee-shell relative">
+                <TechMarqueeLane
+                  items={techItems}
+                  activeIndex={activeIndex}
+                  hoveredIndex={hoveredIndex}
+                  onSelect={handleSelect}
+                  onHoverStart={setHoveredIndex}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                />
+              </div>
+            )}
+          </div>
+        </>
+      ) : null}
     </section>
   );
 };

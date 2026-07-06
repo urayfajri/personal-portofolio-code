@@ -171,7 +171,8 @@ type PageDocumentDataSlicesSlice =
   | ExperienceSlice
   | ContentIndexSlice
   | TechListSlice
-  | BiographySlice;
+  | BiographySlice
+  | AboutClosingSlice;
 
 /**
  * Content for Page documents
@@ -520,6 +521,16 @@ export type AllDocumentTypes =
  */
 export interface BiographySliceDefaultPrimary {
   /**
+   * Story Eyebrow field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.story_eyebrow
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  story_eyebrow: prismic.KeyTextField;
+
+  /**
    * Heading field in *Biography → Default → Primary*
    *
    * - **Field Type**: Text
@@ -528,6 +539,56 @@ export interface BiographySliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   heading: prismic.KeyTextField;
+
+  /**
+   * Value Hook field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.value_hook
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  value_hook: prismic.RichTextField;
+
+  /**
+   * Mindset Heading field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.mindset_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  mindset_heading: prismic.KeyTextField;
+
+  /**
+   * Mindset Body field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.mindset_body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mindset_body: prismic.RichTextField;
+
+  /**
+   * Personal Heading field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.personal_heading
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  personal_heading: prismic.KeyTextField;
+
+  /**
+   * Personal Body field in *Biography → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: biography.default.primary.personal_body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  personal_body: prismic.RichTextField;
 
   /**
    * Description field in *Biography → Default → Primary*
@@ -696,6 +757,16 @@ export type ContentIndexSlice = prismic.SharedSlice<
  */
 export interface ExperienceSliceDefaultPrimaryInformationsItem {
   /**
+   * Entry Type field in *Experience → Default → Primary → Informations*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.informations[].entry_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  entry_type: prismic.SelectField<"work" | "education">;
+
+  /**
    * Title field in *Experience → Default → Primary → Informations*
    *
    * - **Field Type**: Text
@@ -726,6 +797,16 @@ export interface ExperienceSliceDefaultPrimaryInformationsItem {
   institution: prismic.KeyTextField;
 
   /**
+   * Story Teaser field in *Experience → Default → Primary → Informations*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.informations[].story_teaser
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  story_teaser: prismic.KeyTextField;
+
+  /**
    * Description field in *Experience → Default → Primary → Informations*
    *
    * - **Field Type**: Rich Text
@@ -740,6 +821,16 @@ export interface ExperienceSliceDefaultPrimaryInformationsItem {
  * Primary content in *Experience → Default → Primary*
  */
 export interface ExperienceSliceDefaultPrimary {
+  /**
+   * Story Chapter Label field in *Experience → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.story_chapter_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  story_chapter_label: prismic.KeyTextField;
+
   /**
    * Heading field in *Experience → Default → Primary*
    *
@@ -968,12 +1059,27 @@ export interface TechListSliceDefaultPrimaryTechItem {
    * - **Documentation**: https://prismic.io/docs/field#color
    */
   tech_color: prismic.ColorField;
+
+  /**
+   * Tech Badge field in *TechList → Default → Primary → Tech*
+   */
+  tech_badge: prismic.KeyTextField;
 }
 
 /**
  * Primary content in *TechList → Default → Primary*
  */
 export interface TechListSliceDefaultPrimary {
+  /**
+   * Story Chapter Label field in *TechList → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: tech_list.default.primary.story_chapter_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  story_chapter_label: prismic.KeyTextField;
+
   /**
    * Heading field in *TechList → Default → Primary*
    *
@@ -1023,6 +1129,41 @@ type TechListSliceVariation = TechListSliceDefault;
 export type TechListSlice = prismic.SharedSlice<
   "tech_list",
   TechListSliceVariation
+>;
+
+/**
+ * Primary content in *AboutClosing → Default → Primary*
+ */
+export interface AboutClosingSliceDefaultPrimary {
+  story_chapter_label: prismic.KeyTextField;
+  closing_heading: prismic.KeyTextField;
+  closing_body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for AboutClosing Slice
+ */
+export type AboutClosingSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AboutClosingSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *AboutClosing*
+ */
+type AboutClosingSliceVariation = AboutClosingSliceDefault;
+
+/**
+ * AboutClosing Shared Slice
+ *
+ * - **API ID**: `about_closing`
+ * - **Description**: Closing CTA section for the About page
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutClosingSlice = prismic.SharedSlice<
+  "about_closing",
+  AboutClosingSliceVariation
 >;
 
 /**
@@ -1137,6 +1278,10 @@ declare module "@prismicio/client" {
       TechListSliceDefaultPrimary,
       TechListSliceVariation,
       TechListSliceDefault,
+      AboutClosingSlice,
+      AboutClosingSliceDefaultPrimary,
+      AboutClosingSliceVariation,
+      AboutClosingSliceDefault,
       TextBlockSlice,
       TextBlockSliceDefaultPrimary,
       TextBlockSliceVariation,
